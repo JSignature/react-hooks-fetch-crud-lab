@@ -17,7 +17,7 @@ function QuestionForm(props) {
     })
   }
 
-  function handleSubmit(event) {
+  function handleSubmitClick(event) {
     event.preventDefault()
     console.log(formData)
 
@@ -41,13 +41,13 @@ function QuestionForm(props) {
       body: JSON.stringify(itemData),
     })
       .then(r => r.json())
-      .then(newItem => console.log(newItem))
+      .then(newQuestion => props.handleSubmit(newQuestion))
   }
 
   return (
     <section>
       <h1>New Question</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmitClick}>
         <label>
           Prompt:
           <input

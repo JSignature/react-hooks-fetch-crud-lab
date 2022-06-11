@@ -13,13 +13,24 @@ function App() {
       .then(items => setQuestions(items))
   }, [])
 
+  function handleSubmit(newQuestion) {
+    setQuestions([...questions, newQuestion])
+    // console.log(questions)
+  }
+  function handleDelete(questionId) {
+    const updatedItems = questions.filter(
+      question => question.id !== questionId
+    )
+    setQuestions(updatedItems)
+  }
+
   return (
     <main>
       <AdminNavBar onChangePage={setPage} />
       {page === 'Form' ? (
-        <QuestionForm />
+        <QuestionForm handleSubmit={handleSubmit} />
       ) : (
-        <QuestionList questions={questions} />
+        <QuestionList questions={questions} handleDelete={handleDelete} />
       )}
     </main>
   )
