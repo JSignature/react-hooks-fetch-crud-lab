@@ -24,13 +24,28 @@ function App() {
     setQuestions(updatedItems)
   }
 
+  function handleChange(updatedItem) {
+    const updatedItems = questions.map(question => {
+      if (question.id === updatedItem.id) {
+        return updatedItem
+      } else {
+        return question
+      }
+    })
+    setQuestions(updatedItems)
+  }
+
   return (
     <main>
       <AdminNavBar onChangePage={setPage} />
       {page === 'Form' ? (
         <QuestionForm handleSubmit={handleSubmit} />
       ) : (
-        <QuestionList questions={questions} handleDelete={handleDelete} />
+        <QuestionList
+          questions={questions}
+          handleDelete={handleDelete}
+          handleChange={handleChange}
+        />
       )}
     </main>
   )
